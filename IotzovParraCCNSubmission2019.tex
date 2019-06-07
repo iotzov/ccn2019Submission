@@ -83,6 +83,16 @@ is identical and we modulate intelligibility by presenting visuals that
 are either congruent (i.e. the mouth of the speaker and the heard audio align)
 or incongruent (i.e. heard audio and speaker do not align).
 
+\begin{figure}[h]
+  \begin{center}
+    \includegraphics[width=\columnwidth,height=5.5cm]{Figure3a}
+  \end{center}
+  \caption{Visualization of the CCA model showing spatial (top)
+  and temporal (bottom) EEG response functions. SRC values shown
+  are an average over all subjects and conditions.}
+  \label{srcModel}
+\end{figure}
+
 
 
 \section{Methods}
@@ -97,7 +107,7 @@ or incongruent (i.e. heard audio and speaker do not align).
   congruent/incongruent visuals in a 2 x 2 design. Subjects were presented
   with all 30 stimuli in each of the four conditions, for a total of 120
   trials that took place over 2 experimental sessions. The sessions were
-  seperated by at least one week to minimize the effects of subject 
+  separated by at least one week to minimize the effects of subject 
   memory on the results.
 
   Before each 60s trial, subjects were presented with a `target word' and 
@@ -114,7 +124,8 @@ or incongruent (i.e. heard audio and speaker do not align).
 
 \subsection{EEG and Stimulus Processing}
 
-  EEG was recorded using a BioSemi Active II amplifier with 64 electrodes 
+  EEG was recorded from 20 healthy subjects with normal hearing
+  using a BioSemi Active II amplifier with 64 electrodes 
   arranged according to the International 10-20 system, in addition to 6
   electrooculogram (EOG) electrodes. The EEG was sampled at 512 Hz and 
   later downsampled to the framerate of the video presentation (30 Hz).
@@ -133,6 +144,16 @@ or incongruent (i.e. heard audio and speaker do not align).
   with 30 columns is constructed to capture up to a 1s delay.
   
 \subsection{Stimulus-Response Correlation (SRC)}
+
+  % \begin{figure}[]
+  %   \begin{center}
+  %     \includegraphics[width=\columnwidth,height=5.5cm]{Figure3a}
+  %   \end{center}
+  %   \caption{Visualization of the CCA model showing spatial (top)
+  %   and temporal (bottom) EEG response functions. SRC values shown
+  %   are an average over all subjects and conditions.}
+  %   \label{srcModel}
+  % \end{figure}
 
   The models used in these types of analyses are typically encoding or 
   decoding models. The encoding approach uses various features of the 
@@ -160,8 +181,11 @@ or incongruent (i.e. heard audio and speaker do not align).
 
   The hybrid model is trained using data from all subjects in all conditions. 
   The resulting spatial and temporal response functions can be seen in 
-  \ref{behavior}. The model is then used to separately compute SRC for each 
-  subject in each of the four conditions.
+  \ref{srcModel}. The model is then used to separately compute SRC for each 
+  subject in each of the four conditions. Statistical significance of SRC 
+  values is estimated by comparing values to those produced by 
+  correlating 1000 sets of circularly shuffled EEG data with the stimuli using 
+  the same procedure as the normal EEG data.
   
 
 % \subsection{Figures}
@@ -184,25 +208,148 @@ or incongruent (i.e. heard audio and speaker do not align).
 % \label{sample-figure}
 % \end{figure}
 
-\begin{figure}[]
-  \begin{center}
-    \includegraphics[width=\columnwidth]{Figure2}
-  \end{center}
-  \caption{}
-  \label{behavior}
-\end{figure}
-
 
 \section{Results}
 
-  \subsection{Congruent Visual Speech Increases Word Detection}
+\subsection{Congruent Visual Speech Increases Word Detection}
 
-  \subsection{Congruent Visual Speech Increases Stimulus-Response Correlation}
+  Subject performance on the behavioral task was quantified in terms of the 
+  F1 score (described in Methods above). We performed a two-way repeated 
+  measures ANOVA on these scores with main factors of noise level and 
+  congruency. We found very large effects on behavior of both noise level 
+  $[F(1,19) = 284.9, p = 6 x 10^{-13}]$ and congruency
+  $[F(1, 19) = 917.4, p = 1 x 10^{-17}]$, as well as for the interaction 
+  between noise level and congruency $[F(1, 19) = 118.1, p = 1 x 10^{-9}]$.
+
+  These results are in line with our expectations, as the effects of visual 
+  information on the perception of noisy speech as well characterized 
+  \cite{Ross2007}. However, the results indicate that we successfully 
+  manipulated the intelligibility of the audiovisual speech without 
+  altering the auditory portion of the stimulus.
+  For a visual representation of these results, please see Fig. \ref{behavior}.
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[]{Figure2c}
+    \end{center}
+    \caption{Performance on the behavioral word detection
+    task for each subject in each condition (-6dB congruent, 
+    -6dB incongruent, -9dB congruent, -9dB incongruent) 
+    reported as F1 statistic.}
+    \label{behavior}
+  \end{figure}
+
+\subsection{Congruent Visual Speech Increases Stimulus-Response Correlation}
+
+  \begin{figure}[]
+    \begin{center}
+      \includegraphics[width=0.8\columnwidth,height=6cm]{Figure4}
+    \end{center}
+    \caption{SRC scores for each subject in all conditions.
+    Performance within each noise condition is connected 
+    with a line.}
+    \label{srcResults}
+  \end{figure}
+
+  Using the hybrid approach described above, we used CCA 
+  to relate the auditory amplitude envelope at various time delays to the 
+  EEG signal across various electrodes. This process results in a number of 
+  correlated components, of which we only examine the three most highly 
+  correlated. The resulting spatial and temporal 
+  response functions can be seen in Fig. \ref{srcModel}. The correlation 
+  values found are small, but are significant given the large amount of 
+  data collected \textit{(r = 0.039, 0.025, 0.009, respectively for 
+  first 3 SRC components, p < 0.001 using shuffle statistics)}.
+  Overall SRC values are reported as the sum of these first three components, 
+  calculated separately for each subject and condition 
+  (See Fig. \ref{srcResults}).
+
+  We performed a two-way repeated measures ANOVA on these SRC values and found 
+  a very significant effect for both noise level 
+  $[F(1, 19) = 44.54, p = 2 x 10^{-6}]$ and congruency 
+  $[F(1, 19) = 109.4, p = 2 x 10^{-9}]$. In contrast with the behavioral 
+  results, we did not find a significant interaction between the two effects,
+  suggesting that the effect of congruency on SRC is equally strong at both 
+  noise levels. We suspected that these effect may be due to a stronger 
+  evoked response elicited by the speech as well as the noise fluctuations. 
+  To test this, we repeated the analysis using the envelope of the 
+  clean speech and the noise alone, instead of the mixed noisy speech as above.
+
+  The results of this analysis showed increased SRC values for the clean 
+  speech \textit{(r = 0.05, 0.03, 0.01, respectively for first 3 components,
+  p < 0.001 using shuffle statistics)} 
+  compared to the noisy speech \textit{(r = 0.039, 0.025, 0.009, respectively
+  for first 3 SRC components)}, as well as strong effects of noise level 
+  $[F(1, 19) = 52.53, p = 7 x 10^{-7}]$ and congruency
+  $[F(1, 19) = 54.43, p = 5 x 10^{-7}]$. The SRC for the noise-only envelope 
+  was much weaker \textit{(r = 0.01, 0.0047, 0.0019, p < 0.001, p = 0.001, 
+  p = 0.14, respectively for first 3 components, p-values calculated through
+  shuffle statistics)}, and we did not find a significant effect for noise 
+  level, nor for congruency. This result conflicts with our initial hypothesis,
+  and suggests that listeners were able to extract speech from the noisy 
+  environment and were not `tracking' the noise in the same way as the speech.
+  However, considering the small differences between the noisy speech and 
+  clean speech results, this result does validate our approach using the 
+  noisy speech, which is the only input available in real-world scenarios.
+
+  We have shown that both behavioral task performance and SRC increase in 
+  congruent and less distorted conditions. We visually relate the two 
+  in Fig. \ref{srcVsBehavior}a. For the majority of subjects, an increase 
+  in SRC coincides with increased performance on the behavioral task 
+  (indicated by positive slope in Fig. \ref{srcVsBehavior}a). Fig. 
+  \ref{srcVsBehavior}b is a different view of the same result, showing that
+  the change in behavioral performance and SRC have the same sign for most 
+  subjects \textit{(p = 0.0026, p = 0.0004 for -9dB and -6dB respectively, 
+  sign test)}.
+
+  \begin{figure*}[]
+    \begin{center}
+      \includegraphics[scale=0.8]{Figure5ab}
+    \end{center}
+    \caption{(a) Comparison between behavioral word detection performance
+    and SRC for each subject in all conditions. (b) Difference between
+    congruent and incongruent conditions within each noise level for
+    each subject. Points in the first quadrant indicate that gains in
+    one measure coincide with gains in the other.}
+    \label{srcVsBehavior}
+  \end{figure*}
 
 
 \section{Conclusion}
 
-conclusion here
+  Our main finding, that improved speech perception coincides with an increase 
+  in stimulus-response correlation, is consistent with much of the previous 
+  research into the topic 
+  \cite{Ding2013,Peelle2013,Vanthornhout2017,Crosse2015}. 
+  We extend this previous work by using incongruent audiovisual speech as a 
+  control condition in noise, and demonstrated that this effect is correlated 
+  with gains in behavioral performance measures within individual subjects.
+
+  There is ongoing debate in the speech tracking literature about whether 
+  these correlated EEG responses to speech represent an active parsing of 
+  hierarchical semantic language features \cite{Ding2015} or are a simpler 
+  response to acoustic features of the words presented \cite{Frank2018}.
+  Our results suggest that when a listener successfully detects and attends 
+  to speech in a noisy environment, the evoked EEG responses are stronger than 
+  when the listener fails to detect the speech. We do not attempt to make a
+  causal claim about whether word detection elicits the evoked EEG responses 
+  or vice versa, as waning attention may account for the diminished SRC. 
+  Further studies would be needed to disentangle the role that attention plays
+  here.
+
+  The motivation for our work was to find an objective assessment for the 
+  intelligibility of speech in the context of hearing aids. There are several
+  novel contributions that our work offers in this context. First, we have 
+  shown the reliable ability to predict intelligibility within individual 
+  subjects, which is critical in tuning a hearing aid for an individual. 
+  Second, because we did not alter the auditory stimulus, confounds surrounding
+  the alteration of the auditory stimulus have been eliminated. The changes 
+  in SRC observed here are thus likely due to the processing of the auditory
+  stimulus by the subject, and not a result of changes to the stimulus itself.
+  Finally, in contrast to previous work, our SRC measure does not require
+  access to the clean speech in order to make predictions about intelligibility.
+  In practical scenarios, access to the clean speech is impossible, thus making
+  an approach that can work within noisy contexts essential.
 
 
 \bibliographystyle{apacite}
