@@ -63,25 +63,25 @@ with fluctuations in signal amplitude and spectral content
 \cite{Luo2007,Horton2014}. This stimulus-driven brain activity has been linked
 to attention \cite{ZionGolumbic2013,OSullivan2015}, in particular in 
 multi-speaker scenarios where these correlations are thought to reflect 
-the listener's ability to follow the attended speech stream. We attribute this
+the listener's ability to follow the attended speech stream. We see similar 
+findings in studies of noisy speech, where the clean speech envelope still 
+shows correlation with the brain response \cite{Ding2013,Vanthornhout2017}.
+We attribute this
 speech tracking phenomenon to an exogenous stimulus-driven process due to the 
 consistent responses elicited by a speech stimulus across subjects 
 \cite{Ki2016,Cohen2017}. 
 
-For noisy speech, correlations can still be found between the brain response 
-and the amplitude envelope of the clean speech \cite{Ding2013,Vanthornhout2017}.
-This may be a reflection of the incredibly robust ability of listeners to 
-understand speech despite significant noise or distortions. A consistent 
+A consistent 
 confound in previous research has been that speech intelligibility is 
-modulated by altering various properties of the stimulus. Because of this,
-it is difficult to determine whether changes in speech tracking are 
+modulated by altering various properties of the stimulus. This makes
+it difficult to determine whether changes in speech tracking are 
 caused by genuine changes in auditory processing or merely a reflection of the
 altered stimulus. We have attempted to mitigate this confound by keeping 
 the stimulus unchanged and modulating speech intelligibility through 
 visual cues. The audio presented to subjects in our two experimental conditions
 is identical and we modulate intelligibility by presenting visuals that 
 are either congruent (i.e. the mouth of the speaker and the heard audio align)
-or incongruent (i.e. heard audio and speaker do not align).
+or incongruent.
 
 \begin{figure}[h]
   \begin{center}
@@ -101,14 +101,12 @@ or incongruent (i.e. heard audio and speaker do not align).
 
   The stimuli used in this experiment were previously used in other 
   speech tracking experiments with EEG \cite{Crosse2015,Crosse2016}.
-  The stimuli consist of 30 audiovisual talking head clips of President
+  The stimuli consist of 120 audiovisual talking head clips of President
   Barack Obama discussing the Affordable Care Act, each 60s long. In total, 
   there were four stimulus conditions combining -9 dB/ -6 dB noise and 
   congruent/incongruent visuals in a 2 x 2 design. Subjects were presented
-  with all 30 stimuli in each of the four conditions, for a total of 120
-  trials that took place over 2 experimental sessions. The sessions were
-  separated by at least one week to minimize the effects of subject 
-  memory on the results.
+  with 30 stimuli in each of the four conditions, for a total of 120
+  trials that took place over 2 experimental sessions.
 
   Before each 60s trial, subjects were presented with a `target word' and 
   were instructed to press a button whenever they heard the target. Target 
@@ -125,8 +123,7 @@ or incongruent (i.e. heard audio and speaker do not align).
 \subsection{EEG and Stimulus Processing}
 
   EEG was recorded from 20 healthy subjects with normal hearing
-  using a BioSemi Active II amplifier with 64 electrodes 
-  arranged according to the International 10-20 system, in addition to 6
+  using a BioSemi Active II amplifier with 64 electrodes, in addition to 6
   electrooculogram (EOG) electrodes. The EEG was sampled at 512 Hz and 
   later downsampled to the framerate of the video presentation (30 Hz).
   Before correlation to the stimulus, the EEG signal was preprocessed as 
@@ -155,15 +152,16 @@ or incongruent (i.e. heard audio and speaker do not align).
   %   \label{srcModel}
   % \end{figure}
 
-  The models used in these types of analyses are typically encoding or 
+  The models used in much of the speech tracking literature 
+  are typically encoding or 
   decoding models. The encoding approach uses various features of the 
-  stimulus to predict the brain response. The decoding approach is the reverse,
-  using the brain response to reconstruct the stimulus. Here, we used a 
+  stimulus to predict the brain response, while the decoding approach works
+  from the brain response and attempts to reconstruct the stimulus.
+  Here, we used a 
   hybrid encoding and decoding approach \cite{Dmochowski2017}. The model 
   attempts to maximize the correlation between the encoded stimulus 
   $\hat{u}(t)$ and the decoded response $\hat{v}(t)$. The two signals 
   are defined as:
-  
     $$\hat{u}(t) = h(t) * s(t)$$
     $$\hat{v}(t) = \sum_{i} w_ir_i(t)$$
   where $s(t)$ is the sound amplitude envelope at time $t$, $h(t)$ is the 
@@ -175,13 +173,12 @@ or incongruent (i.e. heard audio and speaker do not align).
   decoded brain response by computing several components that each capture
   some portion of the correlated signal. The stimulus-response correlation (SRC)
   that we report is the sum of the correlation of $\hat{u}(t)$ and $\hat{v}(t)$
-  for the first three components. For a full discussion of the method for 
-  computing the spatial and temporal response functions, please see 
-  \cite{Dmochowski2017}.
+  for the first three components. For a more full discussion of the method 
+  please see \cite{Dmochowski2017}.
 
-  The hybrid model is trained using data from all subjects in all conditions. 
+  The model is trained using data from all subjects in all conditions. 
   The resulting spatial and temporal response functions can be seen in 
-  \ref{srcModel}. The model is then used to separately compute SRC for each 
+  Fig. \ref{srcModel}. The model is then used to separately compute SRC for each 
   subject in each of the four conditions. Statistical significance of SRC 
   values is estimated by comparing values to those produced by 
   correlating 1000 sets of circularly shuffled EEG data with the stimuli using 
@@ -215,7 +212,7 @@ or incongruent (i.e. heard audio and speaker do not align).
 
   Subject performance on the behavioral task was quantified in terms of the 
   F1 score (described in Methods above). We performed a two-way repeated 
-  measures ANOVA on these scores with main factors of noise level and 
+  measures ANOVA on these scores, considering factors of noise level and 
   congruency. We found very large effects on behavior of both noise level 
   $[F(1,19) = 284.9, p = 6 x 10^{-13}]$ and congruency
   $[F(1, 19) = 917.4, p = 1 x 10^{-17}]$, as well as for the interaction 
@@ -223,7 +220,7 @@ or incongruent (i.e. heard audio and speaker do not align).
 
   These results are in line with our expectations, as the effects of visual 
   information on the perception of noisy speech as well characterized 
-  \cite{Ross2007}. However, the results indicate that we successfully 
+  \cite{Ross2007}. Additionally, the results indicate that we successfully 
   manipulated the intelligibility of the audiovisual speech without 
   altering the auditory portion of the stimulus.
   For a visual representation of these results, please see Fig. \ref{behavior}.
@@ -270,12 +267,14 @@ or incongruent (i.e. heard audio and speaker do not align).
   $[F(1, 19) = 109.4, p = 2 x 10^{-9}]$. In contrast with the behavioral 
   results, we did not find a significant interaction between the two effects,
   suggesting that the effect of congruency on SRC is equally strong at both 
-  noise levels. We suspected that these effect may be due to a stronger 
-  evoked response elicited by the speech as well as the noise fluctuations. 
-  To test this, we repeated the analysis using the envelope of the 
-  clean speech and the noise alone, instead of the mixed noisy speech as above.
+  noise levels. 
+  To test the efficacy of correlating the noisy speech signal to the EEG
+  responses, we repeated the analysis using the envelope of the 
+  clean speech and the envelope of the noise alone, 
+  instead of the mixed noisy speech as above.
 
-  The results of this analysis showed increased SRC values for the clean 
+  The results of this secondary analysis showed increased 
+  SRC values for the clean 
   speech \textit{(r = 0.05, 0.03, 0.01, respectively for first 3 components,
   p < 0.001 using shuffle statistics)} 
   compared to the noisy speech \textit{(r = 0.039, 0.025, 0.009, respectively
@@ -292,8 +291,7 @@ or incongruent (i.e. heard audio and speaker do not align).
   clean speech results, this result does validate our approach using the 
   noisy speech, which is the only input available in real-world scenarios.
 
-  We have shown that both behavioral task performance and SRC increase in 
-  congruent and less distorted conditions. We visually relate the two 
+  We visually relate behavioral task performance to SRC
   in Fig. \ref{srcVsBehavior}a. For the majority of subjects, an increase 
   in SRC coincides with increased performance on the behavioral task 
   (indicated by positive slope in Fig. \ref{srcVsBehavior}a). Fig. 
@@ -319,23 +317,23 @@ or incongruent (i.e. heard audio and speaker do not align).
 
   Our main finding, that improved speech perception coincides with an increase 
   in stimulus-response correlation, is consistent with much of the previous 
-  research into the topic 
+  research into speech tracking
   \cite{Ding2013,Peelle2013,Vanthornhout2017,Crosse2015}. 
   We extend this previous work by using incongruent audiovisual speech as a 
   control condition in noise, and demonstrated that this effect is correlated 
   with gains in behavioral performance measures within individual subjects.
 
-  There is ongoing debate in the speech tracking literature about whether 
-  these correlated EEG responses to speech represent an active parsing of 
-  hierarchical semantic language features \cite{Ding2015} or are a simpler 
-  response to acoustic features of the words presented \cite{Frank2018}.
-  Our results suggest that when a listener successfully detects and attends 
-  to speech in a noisy environment, the evoked EEG responses are stronger than 
-  when the listener fails to detect the speech. We do not attempt to make a
-  causal claim about whether word detection elicits the evoked EEG responses 
-  or vice versa, as waning attention may account for the diminished SRC. 
-  Further studies would be needed to disentangle the role that attention plays
-  here.
+  % There is ongoing debate in the speech tracking literature about whether 
+  % these correlated EEG responses to speech represent an active parsing of 
+  % hierarchical semantic language features \cite{Ding2015} or are a simpler 
+  % response to acoustic features of the words presented \cite{Frank2018}.
+  % Our results suggest that when a listener successfully detects and attends 
+  % to speech in a noisy environment, the evoked EEG responses are stronger than 
+  % when the listener fails to detect the speech. We do not attempt to make a
+  % causal claim about whether word detection elicits the evoked EEG responses 
+  % or vice versa, as waning attention may account for the diminished SRC. 
+  % Further studies would be needed to disentangle the role that attention plays
+  % here.
 
   The motivation for our work was to find an objective assessment for the 
   intelligibility of speech in the context of hearing aids. There are several
